@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','CatsController@index');
+Route::resource('cats','CatsController');
+
+Route::post('cats/upload', 'CatsController@create');
+Route::get('/', 'CatsController@index');

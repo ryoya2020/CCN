@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCatsTable extends Migration
+class CreatePhotosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,17 @@ class CreateCatsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cats', function (Blueprint $table) {
+        Schema::create('photos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('sex');
-            $table->string('age');
-            $table->string('like');
-            $table->string('file_name');
+            $table->unsignedBigInteger('post_id');
+            $table->string('photo_file_name');
             $table->timestamps();
+            
+            $table->foreign('post_id')->references('id')->on('posts');
         });
+
     }
+    
 
     /**
      * Reverse the migrations.
@@ -31,6 +32,6 @@ class CreateCatsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cats');
+        Schema::dropIfExists('photos');
     }
 }
